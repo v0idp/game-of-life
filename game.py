@@ -22,7 +22,7 @@ class GameOfLife(object):
         self.pause_button = Button((self.width / 2 - self.width / 3 / 2 + 5, self.height - 20, self.width / 3 - 10, 20),
                                    'gray', 'Pause', 'black')
         self.reset_button = Button((self.width - self.width / 3 + 10, self.height - 20, self.width / 3 - 10, 20),
-                                   'gray','Reset', 'black')
+                                   'gray', 'Reset', 'black')
         self.cells = []
         self.setupCells()
 
