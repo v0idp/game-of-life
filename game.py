@@ -77,7 +77,7 @@ class GameOfLife(object):
                 for row in range(self.rows):
                     for column in range(self.columns):
                         if self.cells[row][column].pressed(pg.mouse.get_pos()) and \
-                                self.last_updated_cell is not (row, column):
+                                self.last_updated_cell != (row, column):
                             self.last_updated_cell = (row, column)
                             self.cells[row][column].state = not self.cells[row][column].state
             if event.type == pg.QUIT:
