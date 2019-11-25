@@ -14,7 +14,7 @@ class GameOfLife(object):
         self.done = False
         self.pause = True
         self.clock = pg.time.Clock()
-        self.fps = 15
+        self.fps = 60
         self.color = pg.Color('white')
         self.title = pg.display.set_caption('Conway\'s Game of Life (by void*)')
         self.start_button = Button((self.width - self.width, self.height - 20, self.width / 3 - 10, 20),
@@ -67,8 +67,10 @@ class GameOfLife(object):
             if event.type == pg.MOUSEBUTTONDOWN:
                 if self.start_button.pressed(pg.mouse.get_pos()):
                     self.pause = False
+                    self.fps = 15
                 elif self.pause_button.pressed(pg.mouse.get_pos()):
                     self.pause = True
+                    self.fps = 60
                 elif self.reset_button.pressed(pg.mouse.get_pos()):
                     self.setupCells()
             if event.type == pg.MOUSEBUTTONUP:
