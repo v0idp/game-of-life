@@ -14,7 +14,7 @@ class GameOfLife(object):
         self.done = False
         self.pause = True
         self.clock = pg.time.Clock()
-        self.fps = 10
+        self.fps = 15
         self.color = pg.Color('white')
         self.title = pg.display.set_caption('Conway\'s Game of Life (by void*)')
         self.start_button = Button((self.width - self.width, self.height - 20, self.width / 3 - 10, 20),
@@ -24,6 +24,7 @@ class GameOfLife(object):
         self.reset_button = Button((self.width - self.width / 3 + 10, self.height - 20, self.width / 3 - 10, 20),
                                    'gray', 'Reset', 'black')
         self.cells = []
+        self.last_updated_cell = None
         self.setupCells()
 
     def setupCells(self):
@@ -70,11 +71,16 @@ class GameOfLife(object):
                     self.pause = True
                 elif self.reset_button.pressed(pg.mouse.get_pos()):
                     self.setupCells()
+            if event.type == pg.MOUSEBUTTONUP:
+                self.last_updated_cell = None
+            if pg.mouse.get_pressed()[0]:
                 for row in range(self.rows):
                     for column in range(self.columns):
-                        if self.cells[row][column].pressed(pg.mouse.get_pos()):
+                        if self.cells[row][column].pressed(pg.mouse.get_pos()) and \
+                                self.last_updated_cell is not (row, column):
+                            self.last_updated_cell = (row, column)
                             self.cells[row][column].state = not self.cells[row][column].state
-            elif event.type == pg.QUIT:
+            if event.type == pg.QUIT:
                 self.done = True
 
     def main_loop(self):
